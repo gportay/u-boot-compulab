@@ -667,10 +667,10 @@ int power_init_board(void)
 	if (ret)
 		return ret;
 
-	/* set DDR_1_5V to 1.225V */
+	/* set DDR_1_5V to 1.35V */
 	pmic_reg_read(p, PFUZE3000_SW3VOLT, &reg);
 	reg &= ~0x0f;
-	reg |= PFUZE3000_SW3_SETP(12250);
+	reg |= PFUZE3000_SW3_SETP(13500);
 	ret = pmic_reg_write(p, PFUZE3000_SW3VOLT, reg);
 	if (ret)
 		return ret;
