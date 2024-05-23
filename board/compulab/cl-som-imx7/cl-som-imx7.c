@@ -600,6 +600,14 @@ int power_init_board(void)
 	/* disable Low Power Mode during standby mode */
 	pmic_reg_write(p, PFUZE3000_LDOGCTL, 0x1);
 
+	/* set VDD_SOC_IN to 1.1V */
+	pmic_reg_read(p, PFUZE3000_SW1BVOLT, &reg);
+	reg &= ~0x3f;
+	reg |= PFUZE3000_SW1AB_SETP(11000);
+	ret = pmic_reg_write(p, PFUZE3000_SW1BVOLT, reg);
+	if (ret)
+		return ret;
+
 	return 0;
 }
 #endif /* CONFIG_POWER */
